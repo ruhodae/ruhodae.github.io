@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Меню{% endblock %}
+
+{% block content %}
+<h1>Меню</h1>
+<div class="menu-items">
+    {% for item in menu_items %} <!-- Это типичный цикл фор по элементу item его мы прописываем в коде функции-->
+    <div class="menu-item">
+        <img src="{{ item.image }}" alt="{{ item.name }}">
+        <!-- Просто для себя проверил как работает <h3>{{ item.id }}</h3> если что просто выводит id его из бд -->
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.description }}</p>
+        <p><strong>Цена:</strong> ${{ item.price }}</p>
+        <a href="{{ url_for('menu_item', item_id=item.id) }}">Посмотреть подробнее</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Reviews{% endblock %}
+
+{% block content %}
+<h1>Customer Reviews</h1>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<h2>Leave a Review</h2>
+<form action="/reviews" method="post">
+    <label for="username">Your Name:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="comment">Your Review:</label>
+    <textarea id="comment" name="comment" rows="4" required></textarea>
+
+    <button type="submit">Submit Review</button>
+</form>
+
+<h2>All Reviews</h2>
+{% if reviews %}
+    <ul>
+    {% for review in reviews %}
+        <li>
+            <strong>{{ review.username }}</strong>: {{ review.comment }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No reviews yet. Be the first to leave a review!</p>
+{% endif %}
+{% endblock %}

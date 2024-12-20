@@ -1,0 +1,18 @@
+    {% extends 'base.html' %}
+
+    {% block title %}Главная{% endblock %}
+
+    {% block content %}
+
+    <div class="features">
+        <h1>Наши фирменные блюда</h1>
+           {% for item in featured_items %}
+        <div class="feature-item">
+            <img src="{{ item.image }}" alt="{{ item.name }}">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endblock %}

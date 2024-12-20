@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ dish.name }} Details{% endblock %}
+
+{% block content %}
+<div class="dish-details">
+    <img src="{{ dish.image }}" alt="{{ dish.name }}">
+    <h2>{{ dish.name }}</h2>
+    <p class="dish-description">{{ dish.description }}</p>
+    <p class="dish-ingredients">Ингридиенты: {{ dish.ingredients }}</p>
+    <p class="dish-price">Цена: ${{ dish.price }}</p>
+</div>
+{% endblock %}

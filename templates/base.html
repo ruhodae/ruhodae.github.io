@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Restaurant{% endblock %}</title> <!-- Берет значение из файла html и задает его странице -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Главная</a> |
+            <a href="/menu">Меню</a>
+            {% if session.get('user') %}
+                | <a href="/booking">Бронирование</a>
+                | <a href="/profile">Профиль</a>
+                | <span>Добро пожаловать, {{ session['user'] }}!</span>
+                | <a href="/logout">Выйти из аккаунта</a>
+            {% else %}
+                | <a href="/register">Зарегестрироваться</a>
+                | <a href="/login">Войти в аккаунт</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main> <!-- Этот кусок кода нужен для вывода сообщений о входе в аккаунт пользователи или выоходе -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="message {{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; Супер пупер компания 2024. Все права защищены. &copy;</p>
+    </footer>
+</body>
+</html>
